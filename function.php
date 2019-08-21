@@ -41,7 +41,6 @@ function election_result(){
 		}
       	//if there are rows available display all the results
 		foreach ($result as $election) {
-			//echo "<script> alert('".$election['electiontitle']."')</script>"
       	# code...
 
 			echo '<option >'.$election['electiontitle'].'</option >';
@@ -72,10 +71,6 @@ function getelectionid($name){
 			//echo "<script> alert('".$election['electiontitle']."')</script>"
       	# code...
 			$name1= $election['electiontitle'];
-			//echo $name."  = $name1<br />"; 
-		
-			
-
 			// if( $election['electiontitle']==$name){
 			if( $name1==$name){
 
@@ -83,6 +78,34 @@ function getelectionid($name){
 				// echo "<br>success";
 				 return $election['electionid'];
 			}
+		}
+	}
+	else{
+		echo mysqli_error($conn);
+	}
+	mysqli_close($conn);
+}
+
+
+
+function getvoterid($name){
+  include 'ConnectionPage.php';
+
+  	$sql="SELECT * FROM voter where votername='$name';";
+	if ($result=mysqli_query($conn,$sql))
+	{
+      	//count number of rows in query result
+		$rowcount=mysqli_num_rows($result);
+      	//if no rows returned show no news alert
+		if ($rowcount==0) {
+      		# code...
+      		return 0;
+		}
+      	//if there are rows available display all the results
+		foreach ($result as $election) {
+			//echo "<script> alert('".$election['electiontitle']."')</script>"
+      	# code...
+			return $election['voterid'];
 		}
 	}
 	else{

@@ -1,4 +1,10 @@
-
+<?php  
+session_start();  
+if(!isset($_SESSION["user"]))
+{
+   header("location:home.php");
+}
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -161,9 +167,14 @@ h2 {
 <tbody>
 
   <?php
+  require_once 'function.php';
    $name = $_GET['name'];
-
+    $voter_name = $_SESSION['user'];
+        $voter_id = getvoterid($voter_name);
+        $election_id = getelectionid($name);
   include 'ConnectionPage.php';
+
+   
   $sql= "select * from candidate where election_name='$name';";
   if ($result=mysqli_query($conn,$sql))
   {
@@ -173,27 +184,35 @@ h2 {
     if ($rowcount==0) {
        
     }
-
         //if there are rows available display all the results
     foreach ($result as $add ) {
       echo '<tr><td>'.$add['candidatename'].'</td>';
       echo '<td>'.$add['candidateadd'].'</td>';
        echo '<td>'.$add["description"].'</td>';
-      echo '<td ><form action="" method="POST"> <input type="submit" name="vote" value="<img src="c_image/'.$add['image'].'" height="100px" width="100px;">  "></form><br><p font-size="14px"> (click here to vote)</p></button></td></tr>';
-      
+      echo '<td ><form action="" method="POST"> <input type="hidden" name="can_id" value="'.$add['candidateid'].'"><input type="submit" name="vote" value="<img src="c_image/'.$add['image'].'" height="100px" width="100px;">  "></form><br><p font-size="14px"> (click here to vote)</p></button></td></tr>';
           }
+           if(isset($_POST['vote'])){
+             $can_id=$_POST['can_id'];
 
-
-          if(isset($_POST['vote'])){
-  echo "<script>alert('you have successfully voted');</script>";
+            $sql_insert="INSERT INTO `vote` (`voterid`, `candidateid`, `electionid`,`election_name`) VALUES ( '$voter_id', '$can_id', '$election_id', '$name');";
+            if ($result=mysqli_query($conn,$sql_insert)){
+            
+            
+            
+              echo "<script>alert('you have successfully voted $can_id');</script>";
+            }
+            else{
+              echo "<script>alert('sorry! try again.');</script>";
+            }
 }
-
 
 
   }
 else{
   mysqli_close($conn);
 }
+
+
    ?>
   
 </tbody>

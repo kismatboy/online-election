@@ -1,5 +1,12 @@
+<?php  
+session_start();  
+if(!isset($_SESSION["user"]))
+{
+   header("location:home.php");
+}
+echo $_SESSION['id'];
 
-<?php session_start(); ?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +50,6 @@ background-image: url("Image/bguser.png");
   </div>
 </nav>
   
-?>
 </body>
 </html>
 

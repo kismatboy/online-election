@@ -63,11 +63,10 @@ if(isset($_POST['signin'])){
       	# code...
 			if ($row['votername']==$name & $row['password']==$password ){
 				 session_start();
-				 $_SESSION['user']=$name;
-				 $_SESSION['id'] =$row[id];
+				 $_SESSION["user"]= $name;
+				 $_SESSION["id"] = $row["id"];
 				header ("Location:useraccount.php");
-				exit;
-
+			
 			}
 			else{
 								

@@ -106,7 +106,14 @@ h2 {
 }
 </style>
 
+ <script>
+      $(document).ready(function () {
 
+       $( "#test" ).click(function() {
+    alert('you have successfully voted');
+  }); 
+      });
+    </script>
 
 </head>
 <body>
@@ -172,16 +179,25 @@ h2 {
       echo '<tr><td>'.$add['candidatename'].'</td>';
       echo '<td>'.$add['candidateadd'].'</td>';
        echo '<td>'.$add["description"].'</td>';
-      echo '<td >'.$add['image'].'</td></tr>';
+      echo '<td ><form action="" method="POST"> <input type="submit" name="vote" value="<img src="c_image/'.$add['image'].'" height="100px" width="100px;">  "></form><br><p font-size="14px"> (click here to vote)</p></button></td></tr>';
       
           }
+
+
+          if(isset($_POST['vote'])){
+  echo "<script>alert('you have successfully voted');</script>";
+}
+
+
+
   }
 else{
   mysqli_close($conn);
 }
-
    ?>
+  
 </tbody>
+ 
 
   </body>
   </html>

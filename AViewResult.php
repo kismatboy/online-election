@@ -209,18 +209,21 @@ election_list();
   if ($result=mysqli_query($conn,$sql))
   {
         //if there are rows available display all the results
+    echo "<tbody>" ;
     foreach ($result as $election) {
       $can_name=$election['candidatename'];
       $can_id=$election['candidateid'];
 
        $total_vote = vote_count($can_id,$e_id);
 
-      echo "<tbody><tr><td>$can_name</td>
+      echo "<tr><td>$can_name</td>
      <td>$total_vote</td></tr>
-            </tbody>";
+            ";
       //echo "<script> alert('".$election['electiontitle']."')</script>"
         # code...
     }
+        echo "</tbody>" ;
+
   }
   else{
     echo mysqli_error($conn);

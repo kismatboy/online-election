@@ -5,10 +5,11 @@ if(isset($_POST['login'])){
 	$password=$_POST['password'];
 
 			if ($name=='admin' & $password=='admin' ){
-				$_SESSION['user']=$name;
+				session_start();  
+
+				$_SESSION["user"]=$name;
 				 $_SESSION['id'] =0;
 				header ("Location:adminwork.php");
-				exit;
 
 			}
 			else{

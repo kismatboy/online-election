@@ -160,26 +160,27 @@ select
     </ul>
   </div>
 </nav>
-  
-  <p id="heading"><mark>Select Election Title</mark></p>
+
+
+
+<p id="heading">Select Election Title</p>
 <center>
 <form method="POST" name="ElectionForm">
 <br><div align="center">
 
  <select name="election" id="election" onchange="fetch_select(this.value);">
  <option hidden>Select Election</option>
-  <?php
+     <?php
  include 'function.php';
-election_result();
+election_list();
 
  ?>
- 
  </select><br>
 
 </div>   
 </center>
 <p style=" margin: -2.7% 10% 10% 68%">
-<button type="submit" class="btn btn-primary"  onclick="return validform()">View</button>
+<button type="submit" class="btn btn-primary" name="view" onclick="return validform()">View</button>
 </form>
 </p>
 <p id="heading"><mark> Election Result</mark></p>
@@ -194,9 +195,45 @@ election_result();
   </thead>
   
 
-<tbody>
- 
-</tbody>
+
+  <?php
+  if(isset($_POST['view'])){
+     $election_name= $_POST['election'];
+     include 'ConnectionPage.php';
+     require_once 'function.php';
+     $e_id=getelectionid($election_name);
+     $can_name=can_name($e_id);
+
+
+    $sql="SELECT * FROM candidate where election_name='$election_name';";
+  if ($result=mysqli_query($conn,$sql))
+  {
+        //if there are rows available display all the results
+    foreach ($result as $election) {
+      $can_name=$election['candidatename'];
+      $can_id=$election['candidateid'];
+
+       $total_vote = vote_count($can_id,$e_id);
+
+      echo "<tbody><tr><td>$can_name</td>
+     <td>$total_vote</td></tr>
+            </tbody>";
+      //echo "<script> alert('".$election['electiontitle']."')</script>"
+        # code...
+    }
+  }
+  else{
+    echo mysqli_error($conn);
+  }
+
+    
+
+
+
+  }
+   ?>
+
+  
 
 </body>
 </html>

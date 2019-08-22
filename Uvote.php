@@ -1,5 +1,11 @@
+<?php  
+session_start();  
+if(!isset($_SESSION["user"]))
+{
+   header("location:home.php");
+}
+?>
 
-<?php session_start(); 
  
 
 

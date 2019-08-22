@@ -1,4 +1,11 @@
-<?php
+
+<?php  
+session_start();  
+if(!isset($_SESSION["user"]))
+{
+   header("location:home.php");
+}
+?><?php
 require 'ConnectionPage.php';
  if (isset($_POST['reg'])){
   $votername=$_POST['votername'];

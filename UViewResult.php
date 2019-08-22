@@ -1,4 +1,10 @@
-
+<?php  
+session_start();  
+if(!isset($_SESSION["user"]))
+{
+   header("location:home.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,7 +178,7 @@ election_result();
 </div>   
 </center>
 <p style=" margin: -2.7% 10% 10% 68%">
-<button type="submit" class="btn btn-primary"  onclick="return validform()">View</button>
+<input type="submit" class="btn btn-primary"  name=""value="View">
 </form>
 </p>
 

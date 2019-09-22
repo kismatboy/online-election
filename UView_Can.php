@@ -4,6 +4,9 @@ if(!isset($_SESSION["user"]))
 {
  header("location:home.php");
 }
+if ($_GET['id']=1){
+  echo "<script>alert('you have successfully voted $can_id');</script>";
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +115,7 @@ if(!isset($_SESSION["user"]))
  }
 </style>
 
-<script>
+<!-- <script>
   $(document).ready(function () {
 
    $( "#test" ).click(function() {
@@ -120,7 +123,7 @@ if(!isset($_SESSION["user"]))
   }); 
  });
 </script>
-
+ -->
 </head>
 <body>
 
@@ -189,10 +192,18 @@ if(!isset($_SESSION["user"]))
         echo '<tr><td>'.$add['candidatename'].'</td>';
         echo '<td>'.$add['candidateadd'].'</td>';
         echo '<td>'.$add["description"].'</td>';
-        echo '<td ><form action="" method="POST"> <input type="hidden" name="can_id" value="'.$add['candidateid'].'"><input type="submit" name="vote" value="<img src="c_image/'.$add['image'].'" height="100px" width="100px;">  "></form><br><p font-size="14px"> (click here to vote)</p></button></td></tr>';
+        echo '<td >
+
+        <form action="vote.php?name='.$name.'" method="POST"> 
+        <input type="hidden" name="can_id" value="'.$add['candidateid'].'">
+        <input type="image"  src="c_image/'.$add['image'].'" height="100px" width="100px;"> 
+        </form><br><p font-size="14px"> (click here to vote)</p></button>
+
+        </td></tr>';
       }
 
       if(isset($_POST['vote'])){
+         echo "<script>alert('clicked');</script>";
        $can_id=$_POST['can_id'];
        $sql_check="select * from vote where voterid ='$voter_id'";
        if ($result=mysqli_query($conn,$sql_check))

@@ -4,10 +4,15 @@ if(!isset($_SESSION["user"]))
 {
  header("location:home.php");
 }
-if ($_GET['id']=1){
-  echo "<script>alert('you have successfully voted $can_id');</script>";
-}
-?> 
+if ($_GET['id']==1){
+  echo "<script>alert('You have successfully voted.');</script>";
+}if ($_GET['id']==4){
+ echo "<script>alert('sorry! You have already use your voting right.');</script>";
+}if ($_GET['id']==3){
+echo "<script>alert('sorry! try again.');</script>";}
+if ($_GET['id']==5){
+ echo "<script>alert('you have successfully voted $can_id');</script>";
+           ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>

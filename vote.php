@@ -1,6 +1,6 @@
  <?php
 
-
+$seconds = 5;
 session_start();  
 if(!isset($_SESSION["user"]))
 {
@@ -30,27 +30,24 @@ include_once 'ConnectionPage.php';
           $sql_insert="INSERT INTO `vote` (`voterid`, `candidateid`, `electionid`,`election_name`) VALUES ( '$voter_id', '$can_id', '$election_id', '$name');";
           if ($result=mysqli_query($conn,$sql_insert)){
 
-            echo "<script>alert('you have successfully voted $can_id');</script>";
-            header("location:uview_can.php?name=$name ");
+           
+              header("location:uview_can.php?id=5&name=$name");
+            
           }
           else{
-            echo "<script>alert('sorry! try again.');</script>";
-
             
-             if(!isset($_SESSION["user"]))
-            {
-              header("location:uview_can.php?name=$name&id=1");
-            }
+
+           
+              header("location:uview_can.php?id=3&name=$name");
+            
           }
 
         }  
         else{
           echo $rowcount;
-          echo "<script>alert('sorry! You have already use your voting right.');</script>";
-         if(!isset($_SESSION["user"]))
-            {
-              header("location:uview_can.php?name=$name");
-            }
+          
+              header("location:uview_can.php?id=4&name=$name");
+            
           }
         }
         else{

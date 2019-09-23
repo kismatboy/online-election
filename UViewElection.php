@@ -208,7 +208,7 @@ table {
     foreach ($result as $add ) {
       echo '<tr><td>'.$add['electionid'].'</td>';
       echo '<td>'.$add['electiontitle'].'</td>';
-       echo '<td><a href="uView_Can.php?name='.$add["electiontitle"].'"> <button class="btn"> view candiates</button></a></td>';
+       echo '<td><a href="uView_Can.php?id=2&name='.$add["electiontitle"].'"> <button class="btn"> view candiates</button></a></td>';
       echo '<td>'.$add['startdate'].'</td>';
       echo '<td>'.$add['enddate'].'</td></tr>';
       

@@ -12,6 +12,7 @@ if ($_GET['id']==1){
 echo "<script>alert('sorry! try again.');</script>";}
 if ($_GET['id']==5){
  echo "<script>alert('you have successfully voted $can_id');</script>";
+}
            ?> 
 <!DOCTYPE html>
 <html lang="en">

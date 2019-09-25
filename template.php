@@ -106,7 +106,7 @@ background-image: url("Image/bguser.png");
   
      <p><button onclick="changeName()">Name Change</button></p>
     <p><button onclick="passChange()">Password Change</button></p>
-   <!--  <p><button onclick="tempaddChange()">Temporary Address Change</button> </p> -->
+    <p><button onclick="tempaddChange()">Temporary Address Change</button> </p>
   <p><button onclick="permanentChange()">Permanent Address Change</button></p>
     <p><button onclick="phoneChange()">Phone number Change</button></p>
 
@@ -120,10 +120,9 @@ background-image: url("Image/bguser.png");
   <!-- Modal content -->
   <div class="modal-content">
     <span  class="close1" id="close">&times;</span>
-    <p> change name</p>
-    <form method="POST" action="">
-      <input type="text" name="name" placeholder="new name here"><br/>
-      <input type="submit" name="changeName">
+    <form>
+      <input type="text" name="name">
+      <input type="submit" name="btnName">
     </form>
   </div>
 </div>
@@ -132,9 +131,9 @@ background-image: url("Image/bguser.png");
   <!-- Modal content -->
   <div class="modal-content">
     <span  class="close6" id="close">&times;</span>
-    <form  method="POST" action="">
-      <input type="text" name="temp">
-      <input type="submit" name="changeTempAdd">
+    <form>
+      <input type="text" name="name">
+      <input type="submit" name="btnName">
     </form>
   </div>
 </div>
@@ -145,9 +144,9 @@ background-image: url("Image/bguser.png");
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close2"  id="close">&times;</span>
-    <form  method="POST" action="">
-      <input type="text" name="pass">
-      <input type="submit" name="changePass">
+    <form>
+      <input type="text" name="name">
+      <input type="submit" name="btnName">
     </form>
   </div>
 </div>
@@ -157,9 +156,9 @@ background-image: url("Image/bguser.png");
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close3" id="close">&times;</span>
-    <form  method="POST" action="">
-      <input type="text" name="perAdd">
-      <input type="submit" name="changePerAdd">
+    <form>
+      <input type="text" name="name">
+      <input type="submit" name="btnName">
     </form>
   </div>
 </div>
@@ -169,87 +168,12 @@ background-image: url("Image/bguser.png");
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close4"    id="close">&times;</span>
-    <form  method="POST" action="">
-      <input type="text" name="phone">
-      <input type="submit" name="changePhone">
+    <form>
+      <input type="text" name="name">
+      <input type="submit" name="btnName">
     </form>
   </div>
 </div>
-
-<?php 
-require('ConnectionPage.php');
- if (isset($_POST['changePhone'])) {
-   # code...
-  $phone=$_POST['phone'];
-  $user = $_SESSION["user"];
-  $sql="UPDATE voter SET phone = '$phone' WHERE votername='$user'";
-  if (mysqli_query($conn,$sql)){
-    echo '<script>alert("phone num changed successfully.")</script>';
-  }
-  else{
-    echo mysqli_error($conn);
-  }
- }
-
-if (isset($_POST['changePerAdd'])) {
-   # code...
-    $address=$_POST['perAdd'];
-  $user = $_SESSION["user"];
-  $sql="UPDATE voter SET permanentadd = '$address' WHERE votername='$user'";
-  if (mysqli_query($conn,$sql)){
-       echo $address .'<br>'.$user;
-  echo '<script>alert("permanent address changed successfully.")</script>';
-  }
-  else{
-    echo mysqli_error($conn);
-  }
-
-
- }
-if (isset($_POST['changeTempAdd'])) {
-   # code...
-    $phone=$_POST['temp'];
-  $user = $_SESSION["user"];
-  $sql="UPDATE voter SET phone = '$phone' WHERE votername='$user'";
-  if (mysqli_query($conn,$sql)){
-    echo '<script>alert("Temporary address changed successfully.")</script>';
-  }
-  else{
-    echo mysqli_error($conn);
-  }
-
- }
-if (isset($_POST['changeName'])) {
-   # code...
-    $name=$_POST['name'];
-  $user = $_SESSION["user"];
-  $sql="UPDATE voter SET votername = '$name' WHERE votername='$user'";
-  if (mysqli_query($conn,$sql)){
-    $_SESSION["user"] =$name;
-  echo '<script>alert("name changed successfully.")</script>';
-  }
-  else{
-    echo mysqli_error($conn);
-  }
-
-
- }
-if (isset($_POST['changePass'])) {
-   # code...
-    $changePass=$_POST['pass'];
-  $user = $_SESSION["user"];
-  $sql="UPDATE voter SET password = '$changePass' WHERE votername='$user'";
-  if (mysqli_query($conn,$sql)){
- 
-
-  echo '<script>alert("password changed successfully.")</script>';
-  }
-  else{
-    echo mysqli_error($conn);
-  }
- }
-
-?>
 
 <script>
 
